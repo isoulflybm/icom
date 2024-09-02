@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <p align="center">
     <a href="https://github.com/yiisoft" target="_blank">
         <img src="https://avatars0.githubusercontent.com/u/993323" height="100px">
@@ -231,3 +232,40 @@ vendor/bin/codecept run functional,unit --coverage --coverage-html --coverage-xm
 ```
 
 You can see code coverage output under the `tests/_output` directory.
+=======
+# icom
+#
+# icom protocol
+#
+# connect to:
+#
+# wss://[url]:[port]/app/[app-id-hash]
+#
+# app-id-hash = [gmt_time_seconds]:[app-id]
+#
+# json:
+#
+# when client connected:
+# ping:[client_app-id]
+#
+# all online clients resopnded:
+# pong:[client_app-id]
+#
+# when client sended to app:
+# send:[to_client_app-id]
+# recv:[from_client_app-id]
+# type:[mime_type_of_data]
+# data:[base64_encoded_data]
+# offset:[offset_from_file_begin]
+#
+# who is client:
+# send:[to_client_app-id]
+# recv:[from_client_app-id]
+#
+# send to all apps:
+# recv:[from_client_app-id]
+# type:[mime_type_of_data]
+# data:[base64_encoded_data]
+# offset:[offset_from_file_begin]
+#
+>>>>>>> 9b7918d86058095e75ab896f0447a632ef00ae91

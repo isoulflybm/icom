@@ -7562,3 +7562,5 @@ DEBUG:websockets.server:! failing connection with code 1006
 DEBUG:websockets.server:x closing TCP connection
 DEBUG:websockets.server:= connection is CLOSED
 INFO:websockets.server:connection closed
+INFO:websockets.server:server listening on [::]:6030
+INFO:websockets.server:server listening on 0.0.0.0:6030

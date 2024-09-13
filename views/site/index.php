@@ -89,6 +89,22 @@ $this->title = 'i.com';
                     }).always((data) => {});
                 });
             }, 30000);
+            setTimeout(() => {
+                ws = new WebSocket('wss://192.168.0.164:8080/');
+                ws.onerror = (e) => {
+                    console.log(e);
+                };
+                ws.onopen = () => {
+                    console.log('Open');
+                    ws.send('Hello!');
+                };
+                ws.onmessage = (e) => {
+                    console.log(e);
+                };
+                ws.onclose = () => {
+                    console.log('Close');
+                }
+            }, 300);
         }
     </script>
 </div>

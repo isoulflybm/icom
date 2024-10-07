@@ -89,7 +89,7 @@ $this->title = 'i.com';
                     }).always((data) => {});
                 });
             }, 30000);
-            setTimeout(() => {
+            /*setTimeout(() => {
                 ws = new WebSocket('wss://192.168.0.164:8080/');
                 ws.onerror = (e) => {
                     console.log(e);
@@ -104,7 +104,7 @@ $this->title = 'i.com';
                 ws.onclose = () => {
                     console.log('Close');
                 }
-            }, 300);
+            }, 300);*/
         }
     </script>
 </div>

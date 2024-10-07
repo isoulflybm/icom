@@ -9,6 +9,6 @@ return [
     'apiGeoKey' => 'e988750b88f64f2da5c980b306407ac2',
     'GeoIP' => [
     ],
-    'rtmpServer' => 'rtmp://news.webhop.me:1935/show',
-    'hlsServer' => 'https://news.webhop.me:8080/show',
+    'rtmpServer' => 'rtmp://icom.hopto.org:1935/show',
+    'hlsServer' => 'https://icom.hopto.org:8080/show',
 ];

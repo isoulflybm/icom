@@ -1,7 +1,0 @@
-{
-	"type": "module",
-	"dependencies": {
-		"express": "^4.19.2",
-		"readline-sync": "^1.4.10"
-	}
-}

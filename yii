@@ -1,21 +1,17 @@
 #!/usr/bin/env php
 <?php
-/**
- * Yii console bootstrap file.
- *
- * @link https://www.yiiframework.com/
- * @copyright Copyright (c) 2008 Yii Software LLC
- * @license https://www.yiiframework.com/license/
- */
 
-defined('YII_DEBUG') or define('YII_DEBUG', true);
-defined('YII_ENV') or define('YII_ENV', 'dev');
+declare(strict_types=1);
 
-require __DIR__ . '/vendor/autoload.php';
-require __DIR__ . '/vendor/yiisoft/yii2/Yii.php';
+use Yiisoft\Yii\Runner\Console\ConsoleApplicationRunner;
 
-$config = require __DIR__ . '/config/console.php';
+require_once __DIR__ . '/autoload.php';
 
-$application = new yii\console\Application($config);
-$exitCode = $application->run();
-exit($exitCode);
+// Run console application runner
+$runner = new ConsoleApplicationRunner(
+    rootPath: __DIR__,
+    debug: $_ENV['YII_DEBUG'],
+    checkEvents: $_ENV['YII_DEBUG'],
+    environment: $_ENV['YII_ENV']
+);
+$runner->run();

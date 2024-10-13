@@ -51,3 +51,14 @@ $this->title = 'My Yii Application';
 
     </div>
 </div>
+
+<script>
+    websocket = new WebSocket('ws://localhost:8000');
+    websocket.onopen = () => {
+        console.log('Open');
+        websocket.send('Hello!');
+    }
+    websocket.onmessage = (e) => {
+        console.log(e.data);
+    }
+</script>

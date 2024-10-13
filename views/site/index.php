@@ -53,7 +53,7 @@ $this->title = 'My Yii Application';
 </div>
 
 <script>
-    websocket = new WebSocket('wss://localhost:8000');
+    websocket = new WebSocket('wss://icom.hopto.org:8000');
     websocket.onopen = () => {
         console.log('Open');
         websocket.send('Hello!');

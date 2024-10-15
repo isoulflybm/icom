@@ -23,6 +23,7 @@ class AppAsset extends AssetBundle
         'css/site.css',
     ];
     public $js = [
+	'https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

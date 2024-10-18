@@ -79,9 +79,12 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 
 <script>
     window.onload = () => {
-	peer = new Peer({
-	    host: 'icom.hopto.org', port: 8000, key: 'icom', path: '/app', secure: true
-	});
+		peer = new Peer({
+			host: 'icom.hopto.org', port: 8000, key: 'icom', path: '/app', secure: true
+		});
+		peer.on('open', (id) => {
+			console.log('Open ID ' + id);
+		});
     }
 </script>
 

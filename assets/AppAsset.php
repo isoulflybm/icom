@@ -20,10 +20,12 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/site.css',
+//        'css/site.css',
+        'css/icom.css'
     ];
     public $js = [
-	'https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js'
+        'https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js',
+        'js/peerjs-messenger.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'adminEmail' => 'admin@example.com',
-    'senderEmail' => 'noreply@example.com',
-    'senderName' => 'Example.com mailer',
-
+    'adminEmail' => 'smartnet-brovary@ukr.net',
+    'senderEmail' => 'isoulfly.bm@gmail.com',
+    'senderName' => 'Smartnet-Brovary',
+    
     'websocketServer' => [
         'host' => env('WEBSOCKETSERVER_HOST', 'localhost'),
         'port' => env('WEBSOCKETSERVER_PORT', 8000),

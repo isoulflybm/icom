@@ -39,9 +39,6 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => [
-            ['label' => 'Home', 'url' => ["/{$this->context->id}/index"]],
-            ['label' => 'About', 'url' => ["/{$this->context->id}/about"]],
-            ['label' => 'Contact', 'url' => ["/{$this->context->id}/contact"]],
             Yii::$app->user->isGuest
                 ? ['label' => 'Login', 'url' => ["/{$this->context->id}/login"]]
                 : ['label' => 'Logout', 'url' => ["/{$this->context->id}/logout"]]
@@ -69,19 +66,6 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         </div>
     </div>
 </footer>
-
-<script>
-    window.onload = () => {
-		peer = new Peer();
-		peer.on('open', (id) => {
-			console.log('Open ID ' + id);
-		});
-        peer.on('connect', (connection) => {
-        });
-        peer.on('call', (media) => {
-        });
-    }
-</script>
 
 <?php $this->endBody() ?>
 </body>

@@ -77,19 +77,6 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     </div>
 </footer>
 
-<script>
-    window.onload = () => {
-		peer = new Peer();
-		peer.on('open', (id) => {
-			console.log('Open ID ' + id);
-		});
-        peer.on('connect', (connection) => {
-        });
-        peer.on('call', (media) => {
-        });
-    }
-</script>
-
 <?php $this->endBody() ?>
 </body>
 </html>

@@ -25,6 +25,7 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         'https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js',
+        'js/websocket-messenger.js',
         'js/peerjs-messenger.js'
     ];
     public $depends = [

@@ -1,4 +1,4 @@
-window.onload = () => {
+window.addEventListener('load', () => {
 	peer = new Peer();
 	peer.on('open', (id) => {
 		console.log('Open ID ' + id);
@@ -8,4 +8,4 @@ window.onload = () => {
     });
     peer.on('call', (media) => {
     });
-}
+});

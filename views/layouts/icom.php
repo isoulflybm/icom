@@ -41,7 +41,8 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             Yii::$app->user->isGuest
-                ?? ['label' => 'Sign Up', 'url' => ["/user/register"]],
+                ? ['label' => 'Sign Up', 'url' => ["/user/register"]]
+                : [],
             Yii::$app->user->isGuest
                 ? ['label' => 'Sign In', 'url' => ["/user/login"]]
                 : ['label' => 'Logout', 'url' => ["/user/logout"]]

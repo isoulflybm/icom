@@ -8,13 +8,16 @@
 use yii\bootstrap5\ActiveForm;
 use yii\bootstrap5\Html;
 
-$this->title = 'Login';
+$this->title = 'Sign In';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Please fill out the following fields to login:</p>
+    <p>
+        <div>Please fill out the following fields to login:</div>
+        <div>(or <?= Html::a('sign up', ['user/register']) ?>)</div>
+    </p>
 
     <div class="row">
         <div class="col-lg-5">

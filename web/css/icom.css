@@ -64,18 +64,8 @@ a.desc:after {
     color: rgba(255, 255, 255, 0.5);
 }
 
-@media(max-width:767px) {
-    .nav li > form > button.logout {
-        display:block;
-        text-align: left;
-        width: 100%;
-        padding: 10px 0;
-    }
-}
-
-.navbar-nav {
-    position: fixed;
-    right: 60px;
+.navbar-right {
+    text-align: right;
 }
 
 .form-group {

@@ -9,6 +9,7 @@ use yii\bootstrap5\Breadcrumbs;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
+use kartik\sidenav\SideNav;
 
 AppAsset::register($this);
 
@@ -34,14 +35,16 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     NavBar::begin([
         'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
-        'options' => ['class' => 'navbar-expand-md navbar-dark bg-dark fixed-top']
+        'options' => ['class' => 'navbar-default navbar-dark bg-dark fixed-top']
     ]);
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav'],
+        'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             Yii::$app->user->isGuest
-                ? ['label' => 'Login', 'url' => ["/{$this->context->id}/login"]]
-                : ['label' => 'Logout', 'url' => ["/{$this->context->id}/logout"]]
+                ?? ['label' => 'Sign Up', 'url' => ["/user/register"]],
+            Yii::$app->user->isGuest
+                ? ['label' => 'Sign In', 'url' => ["/user/login"]]
+                : ['label' => 'Logout', 'url' => ["/user/logout"]]
         ]
     ]);
     NavBar::end();

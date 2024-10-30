@@ -65,7 +65,11 @@ a.desc:after {
 }
 
 .navbar-right {
-    text-align: right;
+    position: absolute;
+    right: 45px;
+    color: rgba(255, 255, 255, 1);
+    padding: 17px 37px 17px 37px;
+    border-radius: 0 0  7px 7px;
 }
 
 .form-group {

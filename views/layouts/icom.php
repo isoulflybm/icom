@@ -35,20 +35,24 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     NavBar::begin([
         'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
-        'options' => ['class' => 'navbar-default navbar-dark bg-dark fixed-top']
-    ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            Yii::$app->user->isGuest
-                ? ['label' => 'Sign Up', 'url' => ["/user/register"]]
-                : [],
-            Yii::$app->user->isGuest
-                ? ['label' => 'Sign In', 'url' => ["/user/login"]]
-                : ['label' => 'Logout', 'url' => ["/user/logout"]]
+        'options' => [
+            'class' => 'navbar-default navbar-dark bg-dark navbar-static-top'
         ]
     ]);
     NavBar::end();
+    echo Nav::widget([
+        'options' => [
+            'id' => 'w0-collapse',
+            'class' => 'navbar-nav navbar-dark bg-dark navbar-right navbar-collapse collapse'
+        ],
+        'items' => Yii::$app->user->isGuest ? [
+            ['label' => 'Sign Up', 'url' => ["/user/register"]],
+            ['label' => 'Sign In', 'url' => ["/user/login"]]
+        ]
+        : [
+            ['label' => 'Logout', 'url' => ["/user/logout"]]
+        ]
+    ]);
     ?>
 </header>
 

@@ -18,7 +18,7 @@ use yii\web\IdentityInterface;
  * @property string|null $auth_key
  * @property string|null $access_token
  */
-class User extends ActiveRecord
+class User extends ActiveRecord implements IdentityInterface
 {
     /**
      * {@inheritdoc}
@@ -55,17 +55,6 @@ class User extends ActiveRecord
         ];
     }
 
-    public function beforeSave($insert)
-    {
-        if (parent::beforeSave($insert)) {
-            if ($this->isNewRecord) {
-                $this->auth_key = \Yii::$app->security->generateRandomString();
-            }
-            return true;
-        }
-        return false;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -80,6 +69,14 @@ class User extends ActiveRecord
     public static function findIdentityByAccessToken($token, $type = null)
     {
         return static::findOne(['access_token' => $token]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function findIdentityByAuthKey($key, $type = null)
+    {
+        return static::findOne(['auth_key' => $key]);
     }
 
     /**
@@ -106,7 +103,7 @@ class User extends ActiveRecord
      */
     public function getAuthKey()
     {
-        return $this->authKey;
+        return $this->auth_key;
     }
 
     /**
@@ -114,17 +111,14 @@ class User extends ActiveRecord
      */
     public function validateAuthKey($authKey)
     {
-        return $this->authKey === $authKey;
+        return $this->auth_key === $authKey;
     }
 
     /**
-     * Validates password
-     *
-     * @param string $password password to validate
-     * @return bool if password provided is valid for current user
+     * {@inheritdoc}
      */
-    public function validatePassword($password)
+    public function validateAcessToken($acessToken)
     {
-        return $this->password === $password;
+        return $this->access_token === $accessToken;
     }
 }

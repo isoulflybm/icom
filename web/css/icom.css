@@ -71,6 +71,11 @@ a.desc:after {
     padding: 17px 37px 17px 37px;
     border-radius: 0 0  7px 7px;
 }
+@media (max-width: 768px) {
+    .navbar-right {
+        right: 7px;
+    }
+}
 
 .form-group {
     margin-bottom: 1rem;

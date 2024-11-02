@@ -28,6 +28,16 @@ class LoginForm extends Model
         return [
             // username and password are both required
             [['username', 'password'], 'required'],
+            [['username', 'password'], 'trim'],
+            ['username', function($attribute, $params, $validator) {
+                if(
+                    !preg_match('/^[^\@]+\@[^\@]+$/', $this->$attribute)
+                    && !preg_match('/^\+\d{10,20}$/', $this->$attribute)
+                ) {
+                    $this->addError($attribute, 'Invalid email or phone number.');
+                }
+            }],
+            ['password', 'string', 'min' => 8],
             // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()

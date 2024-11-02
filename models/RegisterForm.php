@@ -36,6 +36,16 @@ class RegisterForm extends Model
         return [
             // username and password and check password are required
             [['username', 'password', 'passwordCheck'], 'required'],
+            [['username', 'password', 'passwordCheck'], 'trim'],
+            ['username', function($attribute, $params, $validator) {
+                if(
+                    !preg_match('/^[^\@]+\@[^\@]+$/', $this->$attribute)
+                    && !preg_match('/^\+\d{10,20}$/', $this->$attribute)
+                ) {
+                    $this->addError($attribute, 'Invalid email or phone number.');
+                }
+            }],
+            [['password', 'passwordCheck'], 'string', 'min' => 8],
             // loginMe must be a boolean value
             ['loginMe', 'boolean'],
             // password is validated by validatePassword()

@@ -121,4 +121,14 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return $this->access_token === $accessToken;
     }
+
+    /**
+     * Gets query for [[UsersLogos]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsersLogos()
+    {
+        return $this->hasMany(UsersLogos::class, ['user_id' => 'id']);
+    }
 }

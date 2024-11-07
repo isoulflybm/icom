@@ -32,8 +32,13 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 
 <header id="header">
     <?php
+    $brandLabel = Yii::$app->name;
+    if(!Yii::$app->user->isGuest) {
+        $logourl = Yii::$app->user->identity->getUsersLogos()->orderBy('id', SORT_DESC)->one();
+        if($logourl) $brandLabel = "<img src='{$logourl->logo}' class='brand-logo'>";
+    }
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
+        'brandLabel' => $brandLabel,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-default navbar-dark bg-dark navbar-static-top'
@@ -50,6 +55,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             ['label' => 'Sign In', 'url' => ["/user/login"]]
         ]
         : [
+            ['label' => 'Settings', 'url' => ["/user/settings"]],
             ['label' => 'Logout', 'url' => ["/user/logout"]]
         ]
     ]);

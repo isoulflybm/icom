@@ -3,20 +3,28 @@
 namespace app\models;
 
 use Yii;
-use yii\base\Model;
+use yii\web\UploadedFile;
+use app\models\UsersLogos;
 
 /**
- * RegisterForm is the model behind the login form.
+ * This is the model class for table "users".
  *
- * @property-read User|null $user
+ * @property int $id
+ * @property string|null $created_at
+ * @property string|null $updated_at
+ * @property string|null $deleted_at
+ * @property string|null $username
+ * @property string|null $auth_key
+ * @property string|null $access_token
  *
+ * @property UsersLogos[] $usersLogos
  */
-class RegisterForm extends Model
+class UserForm extends \yii\db\ActiveRecord
 {
     public $username;
     public $password;
     public $passwordCheck;
-    public $loginMe = true;
+    public $userlogo;
 
     private $_user = false;
     
@@ -35,7 +43,7 @@ class RegisterForm extends Model
     {
         return [
             // username and password and check password are required
-            [['username', 'password', 'passwordCheck'], 'required'],
+            [['username'], 'required'],
             [['username', 'password', 'passwordCheck'], 'trim'],
             ['username', function($attribute, $params, $validator) {
                 if(
@@ -46,8 +54,8 @@ class RegisterForm extends Model
                 }
             }],
             [['password', 'passwordCheck'], 'string', 'min' => 8],
-            // loginMe must be a boolean value
-            ['loginMe', 'boolean'],
+            // userlogo
+            [['userlogo'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, gif'],
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
         ];
@@ -62,6 +70,7 @@ class RegisterForm extends Model
             'username' => 'Phone or email',
             'password' => 'Password',
             'passwordCheck' => 'Repeat password',
+            'userlogo' => 'User Logo',
         ];
     }
 
@@ -77,28 +86,42 @@ class RegisterForm extends Model
         if (!$this->hasErrors()) {
             $user = $this->getUser();
 
-            if ($user || ($this->password !== $this->passwordCheck)) {
+            if ($user && $user->id != yii::$app->user->id || ($this->password !== $this->passwordCheck)) {
                 $this->addError($attribute, 'Incorrect username or password.');
             }
         }
     }
 
-    /**
-     * Logs in a user using the provided username and password.
-     * @return bool whether the user is logged in successfully
-     */
-    public function register()
+    public function settings()
     {
         if ($this->validate()) {
-            $this->_user = new User();
+            $this->_user = User::findOne(yii::$app->user->id);
             $this->_user->username = $this->username;
-            $this->_user->access_token = md5($this->password, false);
-            $this->_user->auth_key = Yii::$app->getSecurity()->generateRandomString();
-            if($this->_user->save(false) && $this->loginMe) {
-                return Yii::$app->user->login($this->getUser(), 0);
+            $this->userlogo = UploadedFile::getInstance($this, 'userlogo');
+            if($this->userlogo) {
+                $type = $this->userlogo->type;
+                $this->userlogo = file_get_contents($this->userlogo->tempName);
+                $userlogo = new UsersLogos();
+                $userlogo->user_id = $this->_user->id;
+                $userlogo->logo = "data:$type;base64,".base64_encode($this->userlogo);
+                $userlogo->save(false);
             }
+            if($this->password) {
+                $this->_user->access_token = md5($this->password, false);
+            }
+            $this->_user->save(false);
         }
         return false;
+    }
+
+    /**
+     * Gets query for [[UsersLogos]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsersLogos()
+    {
+        return $this->hasMany(UsersLogos::class, ['user_id' => 'id']);
     }
 
     /**

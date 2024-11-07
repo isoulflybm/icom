@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\RegisterForm;
+use app\models\UserForm;
 
 class UserController extends Controller
 {
@@ -94,6 +95,28 @@ class UserController extends Controller
 
         //$model->password = '';
         return $this->render('register', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Settings action.
+     *
+     * @return Response|string
+     */
+    public function actionSettings()
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new UserForm();
+        if ($model->load(Yii::$app->request->post()) && $model->settings()) {
+            return $this->goBack();
+        }
+
+        //$model->password = '';
+        return $this->render('settings', [
             'model' => $model,
         ]);
     }

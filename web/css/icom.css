@@ -80,3 +80,8 @@ a.desc:after {
 .form-group {
     margin-bottom: 1rem;
 }
+
+.brand-logo {
+    height: 48px;
+    border-radius: 50%;
+}

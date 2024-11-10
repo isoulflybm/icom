@@ -55,7 +55,7 @@ class UserForm extends \yii\db\ActiveRecord
             }],
             [['password', 'passwordCheck'], 'string', 'min' => 8],
             // userlogo
-            [['userlogo'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, gif'],
+            [['userlogo'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpeg, jpg, gif'],
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
         ];
@@ -100,11 +100,19 @@ class UserForm extends \yii\db\ActiveRecord
             $this->userlogo = UploadedFile::getInstance($this, 'userlogo');
             if($this->userlogo) {
                 $type = $this->userlogo->type;
-                $this->userlogo = file_get_contents($this->userlogo->tempName);
-                $userlogo = new UsersLogos();
-                $userlogo->user_id = $this->_user->id;
-                $userlogo->logo = "data:$type;base64,".base64_encode($this->userlogo);
-                $userlogo->save(false);
+                if(
+                    preg_match('/\.gif^|\.jpg^|\.jpeg^|\.png^/', $type)
+                        && $this->userlogo->size < 65536
+                ) {
+                    $this->userlogo = file_get_contents($this->userlogo->tempName);
+                    $userlogo = new UsersLogos();
+                    $userlogo->user_id = $this->_user->id;
+                    $userlogo->logo = "data:$type;base64,".base64_encode($this->userlogo);
+                    $userlogo->save(false);
+                }
+                else {
+                    $this->addError('userlogo', 'Incorrect logo. file must be smaller 64 k and mouth of gif, jpg, png type.');
+                }
             }
             if($this->password) {
                 $this->_user->access_token = md5($this->password, false);

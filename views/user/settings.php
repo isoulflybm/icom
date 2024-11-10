@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?= $form->field($model, 'passwordCheck')->passwordInput() ?>
 
-            <?= $form->field($model, 'userlogo')->fileInput() ?>
+            <?= $form->field($model, 'userlogo')->fileInput(['accept' => 'image/*']) ?>
 
             <div class="form-group">
                 <div>

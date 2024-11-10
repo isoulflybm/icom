@@ -100,9 +100,7 @@ class UserForm extends \yii\db\ActiveRecord
             $this->userlogo = UploadedFile::getInstance($this, 'userlogo');
             if($this->userlogo) {
                 $type = $this->userlogo->type;
-                if(
-                    preg_match('/\.gif^|\.jpg^|\.jpeg^|\.png^/', $type)
-                        && $this->userlogo->size < 65536
+                if(preg_match('/image\/\w+/', $type) && $this->userlogo->size < 65536
                 ) {
                     $this->userlogo = file_get_contents($this->userlogo->tempName);
                     $userlogo = new UsersLogos();

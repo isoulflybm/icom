@@ -34,7 +34,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     <?php
     $brandLabel = Yii::$app->name;
     if(!Yii::$app->user->isGuest) {
-        $logourl = Yii::$app->user->identity->getUsersLogos()->orderBy('id', SORT_DESC)->one();
+        $logourl = Yii::$app->user->identity->getUsersLogos()->orderBy('id DESC')->one();
         if($logourl) $brandLabel = "<img src='{$logourl->logo}' class='brand-logo'>";
     }
     NavBar::begin([

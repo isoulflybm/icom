@@ -81,7 +81,15 @@ a.desc:after {
     margin-bottom: 1rem;
 }
 
-.brand-logo {
-    height: 25px;
-    border-radius: 50%;
+.navbar-brand {
+    height: 72px;
+    padding-top: 0;
+    font-size: 64px;
 }
+
+.brand-logo {
+    height: 132px;
+    border-radius: 50%;
+    border: 1px solid #000;
+}
+

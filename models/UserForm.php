@@ -100,7 +100,62 @@ class UserForm extends \yii\db\ActiveRecord
             $this->userlogo = UploadedFile::getInstance($this, 'userlogo');
             if($this->userlogo) {
                 $type = $this->userlogo->type;
-                if(preg_match('/image\/\w+/', $type) && $this->userlogo->size < 65536
+                if(preg_match('/image\/\w+/', $type)) {
+                    if($this->userlogo->size >= 65536) {
+                        if(preg_match('/gif$/', $type)) {
+                            $this->userlogo = imagecreatefromgif($this->userlogo->tempName);
+                        }
+                        elseif(preg_match('/jpe?g$/', $type)) {
+                            $this->userlogo = imagecreatefromjpeg($this->userlogo->tempName);
+                        }
+                        elseif(preg_match('/png$/', $type)) {
+                            $this->userlogo = imagecreatefrompng($this->userlogo->tempName);
+                        }
+                        else {
+                            $this->addError('userlogo', 'Incorrect logo. file must be smaller 64 k and mouth of gif, jpg, png type.');
+                        }
+                        $w = 160; $h = 120;
+                        $width = imagesx($this->userlogo);
+                        $height = imagesy($this->userlogo);
+                        if($width > $height) {
+                            $h = ($height / $width) * 120;
+                        }
+                        else {
+                            $w = ($width / $height) * 160;
+                        }
+                        $userlogo = imagecreate($w, $h);
+                        imagecopyresized($userlogo, $this->userlogo, 0, 0, 0, 0, $w, $h, $width, $height);
+                        ob_start();
+                        if(preg_match('/gif$/', $type)) {
+                            imagegif($userlogo);
+                            $this->userlogo = ob_get_contents();
+                        }
+                        elseif(preg_match('/jpe?g$/', $type)) {
+                            imagejpeg($userlogo);
+                            $this->userlogo = ob_get_contents();
+                        }
+                        elseif(preg_match('/png$/', $type)) {
+                            imagepng($userlogo);
+                            $this->userlogo = ob_get_contents();
+                        }
+                        else {
+                            $this->addError('userlogo', 'Incorrect logo. file must be smaller 64 k and mouth of gif, jpg, png type.');
+                        }
+                        imagedestroy($userlogo);
+                        ob_end_clean();
+                    }
+                    else {
+                        $this->userlogo = file_get_contents($this->userlogo->tempName);
+                    }
+                    $userlogo = new UsersLogos();
+                    $userlogo->user_id = $this->_user->id;
+                    $userlogo->logo = "data:$type;base64,".base64_encode($this->userlogo);
+                    $userlogo->save(false);
+                }
+                else {
+                    $this->addError('userlogo', 'Incorrect logo. file must be smaller 64 k and mouth of gif, jpg, png type.');
+                }
+                /*if(preg_match('/image\/\w+/', $type) && $this->userlogo->size < 65536
                 ) {
                     $this->userlogo = file_get_contents($this->userlogo->tempName);
                     $userlogo = new UsersLogos();
@@ -110,7 +165,7 @@ class UserForm extends \yii\db\ActiveRecord
                 }
                 else {
                     $this->addError('userlogo', 'Incorrect logo. file must be smaller 64 k and mouth of gif, jpg, png type.');
-                }
+                }*/
             }
             if($this->password) {
                 $this->_user->access_token = md5($this->password, false);

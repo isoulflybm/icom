@@ -3,24 +3,23 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%users_logos}}`.
+ * Handles the creation of table `{{%posts_entities}}`.
  */
-class m241106_201008_create_users_logos_table extends Migration
+class m241114_213646_create_posts_entities_table extends Migration
 {
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
-        $this->createTable('{{%users_logos}}', [
+        $this->createTable('{{%posts_entities}}', [
             'id' => $this->primaryKey(),
             'created_at' => $this->timestamp()->null()->defaultExpression('CURRENT_TIMESTAMP'),
             'updated_at' => $this->timestamp()->null(),
             'deleted_at' => $this->timestamp()->null()->defaultExpression('NULL'),
-            'user_id' => $this->integer()->notNull(),
-            'logo' => $this->binary(4294967295)->notNull(),
+            'title' => $this->string()->notNull(),
+            'description' => $this->text(4294967295),
         ]);
-        $this->addForeignKey('user_id', 'users_logos', 'user_id', 'users', 'id', 'CASCADE');
     }
 
     /**
@@ -28,6 +27,6 @@ class m241106_201008_create_users_logos_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('{{%users_logos}}');
+        $this->dropTable('{{%posts_entities}}');
     }
 }

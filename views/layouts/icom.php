@@ -32,33 +32,69 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 
 <header id="header">
     <?php
+    
     $brandLabel = Yii::$app->name;
+    $brandUrl = Yii::$app->homeUrl;
     if(!Yii::$app->user->isGuest) {
         $logourl = Yii::$app->user->identity->getUsersLogos()->orderBy('id DESC')->one();
         if($logourl) $brandLabel = "<img src='{$logourl->logo}' class='brand-logo'>";
+        $brandUrl = ["/user/settings"];
     }
+    
     NavBar::begin([
         'brandLabel' => $brandLabel,
-        'brandUrl' => Yii::$app->homeUrl,
+        'brandUrl' => $brandUrl,
         'options' => [
-            'class' => 'navbar-default navbar-dark bg-dark navbar-static-top'
+            'class' => 'navbar navbar-default navbar-dark bg-dark navbar-static-top'
         ]
     ]);
+    
+    $navbar_items = ['label' => '<li class="div">&nbsp;</li>'];
+    if(Yii::$app->user->isGuest) {
+        array_push($navbar_items, ['label' => 'Sign Up', 'url' => ["/user/register"]]);
+        array_push($navbar_items, ['label' => 'Sign In', 'url' => ["/user/login"]]);
+    }
+    else {
+        array_push($navbar_items, ['label' => 'Create', 'url' => ["/feed/create"]]);
+        array_push($navbar_items, ['label' => 'Settings', 'url' => ["/user/settings"]]);
+        array_push($navbar_items, ['label' => 'Logout', 'url' => ["/user/logout"]]);
+    };
+    
     NavBar::end();
+    
     echo Nav::widget([
         'options' => [
             'id' => 'w0-collapse',
-            'class' => 'navbar-nav navbar-dark bg-dark navbar-right navbar-collapse collapse'
+            'class' => 'nav navbar-nav navbar-dark bg-dark navbar-right navbar-collapse collapse'
         ],
-        'items' => Yii::$app->user->isGuest ? [
-            ['label' => 'Sign Up', 'url' => ["/user/register"]],
-            ['label' => 'Sign In', 'url' => ["/user/login"]]
-        ]
-        : [
-            ['label' => 'Settings', 'url' => ["/user/settings"]],
-            ['label' => 'Logout', 'url' => ["/user/logout"]]
+        'items' => $navbar_items
+    ]);
+    
+    NavBar::begin([
+        'options' => [
+            'class' => 'nav navbar-nav navbar-white navbar-expand navbar-static-top'
         ]
     ]);
+    
+    echo Nav::widget([
+        'options' => [
+            'id' => 'w1-collapse',
+            'class' => 'nav navbar-nav navbar-white navbar-right'
+        ],
+        'items' => [
+            ['label' => '+', 'url' => ["/feed/new"]],
+            ['label' => 'News ', 'url' => ["/feed/news"]],
+            ['label' => '+', 'url' => ["/feed/image"]],
+            ['label' => 'Images ', 'url' => ["/feed/images"]],
+            ['label' => '+', 'url' => ["/feed/video"]],
+            ['label' => 'Videos ', 'url' => ["/feed/videos"]],
+            ['label' => '+', 'url' => ["/feed/product"]],
+            ['label' => 'Products ', 'url' => ["/feed/products"]]
+        ]
+    ]);
+    
+    NavBar::end();
+    
     ?>
 </header>
 

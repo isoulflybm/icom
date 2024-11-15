@@ -17,9 +17,9 @@ class m241028_190031_create_users_table extends Migration
             'created_at' => $this->timestamp()->null()->defaultExpression('CURRENT_TIMESTAMP'),
             'updated_at' => $this->timestamp()->null(),
             'deleted_at' => $this->timestamp()->null()->defaultExpression('NULL'),
-            'username' => $this->string(),
-            'auth_key' => $this->string(),
-            'access_token' => $this->string(),
+            'username' => $this->string()->notNull(),
+            'auth_key' => $this->string()->notNull(),
+            'access_token' => $this->string()->notNull(),
         ]);
     }
 

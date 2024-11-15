@@ -82,13 +82,14 @@ a.desc:after {
 }
 
 .navbar-brand {
-    height: 72px;
+    height: 64px;
     padding-top: 0;
-    font-size: 64px;
+    font-size: 48px;
+    z-index: 1000;
 }
 
 .brand-logo {
-    height: 132px;
+    height: 122px;
     border-radius: 50%;
     border: 1px solid #000;
 }

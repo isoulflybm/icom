@@ -82,7 +82,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             'class' => 'nav navbar-nav navbar-white navbar-right'
         ],
         'items' =>
-            (!Yii::$app->user->isGuest) ? [
+            (Yii::$app->user->isGuest) ? [
                 ['label' => 'News ', 'url' => ["/feed/news"]],
                 ['label' => 'Images ', 'url' => ["/feed/images"]],
                 ['label' => 'Videos ', 'url' => ["/feed/videos"]],

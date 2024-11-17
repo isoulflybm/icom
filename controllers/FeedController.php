@@ -2,7 +2,12 @@
 
 namespace app\controllers;
 
-class FeedController extends \yii\web\Controller
+use Yii;
+use yii\web\Controller;
+use yii\web\Response;
+use yii\filters\VerbFilter;
+
+class FeedController extends Controller
 {
     public function actionIndex()
     {

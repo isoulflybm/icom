@@ -81,15 +81,21 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             'id' => 'w1-collapse',
             'class' => 'nav navbar-nav navbar-white navbar-right'
         ],
-        'items' => [
-            ['label' => '+', 'url' => ["/feed/new"]],
-            ['label' => 'News ', 'url' => ["/feed/news"]],
-            ['label' => '+', 'url' => ["/feed/image"]],
-            ['label' => 'Images ', 'url' => ["/feed/images"]],
-            ['label' => '+', 'url' => ["/feed/video"]],
-            ['label' => 'Videos ', 'url' => ["/feed/videos"]],
-            ['label' => '+', 'url' => ["/feed/product"]],
-            ['label' => 'Products ', 'url' => ["/feed/products"]]
+        'items' =>
+            (!Yii::$app->user->isGuest) ? [
+                ['label' => 'News ', 'url' => ["/feed/news"]],
+                ['label' => 'Images ', 'url' => ["/feed/images"]],
+                ['label' => 'Videos ', 'url' => ["/feed/videos"]],
+                ['label' => 'Products ', 'url' => ["/feed/products"]]
+            ] : [
+                ['label' => '+', 'url' => ["/feed/new"]],
+                ['label' => 'News ', 'url' => ["/feed/news"]],
+                ['label' => '+', 'url' => ["/feed/image"]],
+                ['label' => 'Images ', 'url' => ["/feed/images"]],
+                ['label' => '+', 'url' => ["/feed/video"]],
+                ['label' => 'Videos ', 'url' => ["/feed/videos"]],
+                ['label' => '+', 'url' => ["/feed/product"]],
+                ['label' => 'Products ', 'url' => ["/feed/products"]]
         ]
     ]);
     

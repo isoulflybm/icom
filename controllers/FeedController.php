@@ -11,12 +11,34 @@ class FeedController extends \yii\web\Controller
 
     public function actionCreate()
     {
-        return $this->render('create');
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new PostForm();
+        if ($model->load(Yii::$app->request->post()) && $model->create()) {
+            return $this->goBack();
+        }
+        
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     public function actionNew()
     {
-        return $this->render('new');
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new PostForm();
+        if ($model->load(Yii::$app->request->post()) && $model->new()) {
+            return $this->goBack();
+        }
+
+        return $this->render('new', [
+            'model' => $model,
+        ]);
     }
 
     public function actionNews()
@@ -26,7 +48,18 @@ class FeedController extends \yii\web\Controller
 
     public function actionImage()
     {
-        return $this->render('image');
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new PostForm();
+        if ($model->load(Yii::$app->request->post()) && $model->image()) {
+            return $this->goBack();
+        }
+        
+        return $this->render('image', [
+            'model' => $model,
+        ]);
     }
 
     public function actionImages()
@@ -36,7 +69,18 @@ class FeedController extends \yii\web\Controller
 
     public function actionVideo()
     {
-        return $this->render('video');
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new PostForm();
+        if ($model->load(Yii::$app->request->post()) && $model->video()) {
+            return $this->goBack();
+        }
+        
+        return $this->render('video', [
+            'model' => $model,
+        ]);
     }
 
     public function actionVideos()
@@ -46,7 +90,18 @@ class FeedController extends \yii\web\Controller
 
     public function actionProduct()
     {
-        return $this->render('product');
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new PostForm();
+        if ($model->load(Yii::$app->request->post()) && $model->product()) {
+            return $this->goBack();
+        }
+        
+        return $this->render('product', [
+            'model' => $model,
+        ]);
     }
 
     public function actionProducts()

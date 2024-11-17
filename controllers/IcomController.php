@@ -6,7 +6,6 @@ use Yii;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
-use app\models\PostForm;
 
 class IcomController extends Controller
 {

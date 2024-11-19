@@ -18,7 +18,9 @@ class m241114_213607_create_images_table extends Migration
             'updated_at' => $this->timestamp()->null(),
             'deleted_at' => $this->timestamp()->null()->defaultExpression('NULL'),
             'image' => $this->binary(4294967295)->notNull(),
+            'post_id' => $this->integer()->notNull(),
         ]);
+        $this->addForeignKey('image_id', 'images', 'post_id', 'posts', 'id', 'CASCADE');
     }
 
     /**

@@ -21,6 +21,7 @@ class m241114_213558_create_posts_table extends Migration
             'title' => $this->string()->notNull(),
             'description' => $this->text(4294967295)->notNull(),
         ]);
+        $this->addForeignKey('entity_id', 'posts', 'entity_id', 'posts_entities', 'id', 'CASCADE');
     }
 
     /**

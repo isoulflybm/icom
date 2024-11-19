@@ -11,10 +11,6 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($model, 'created_at') ?>
-        <?= $form->field($model, 'updated_at') ?>
-        <?= $form->field($model, 'deleted_at') ?>
-        <?= $form->field($model, 'entity_id') ?>
         <?= $form->field($model, 'title') ?>
         <?= $form->field($model, 'description') ?>
     

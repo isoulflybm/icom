@@ -18,7 +18,9 @@ class m241114_213615_create_videos_table extends Migration
             'updated_at' => $this->timestamp()->null(),
             'deleted_at' => $this->timestamp()->null()->defaultExpression('NULL'),
             'video' => $this->binary(4294967295)->notNull(),
+            'post_id' => $this->integer()->notNull(),
         ]);
+        $this->addForeignKey('video_id', 'videos', 'post_id', 'posts', 'id', 'CASCADE');
     }
 
     /**

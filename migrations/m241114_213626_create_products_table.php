@@ -19,7 +19,9 @@ class m241114_213626_create_products_table extends Migration
             'deleted_at' => $this->timestamp()->null()->defaultExpression('NULL'),
             'product' => $this->binary(4294967295)->notNull(),
             'price' => $this->integer()->notNull(),
+            'post_id' => $this->integer()->notNull(),
         ]);
+        $this->addForeignKey('product_id', 'products', 'post_id', 'posts', 'id', 'CASCADE');
     }
 
     /**

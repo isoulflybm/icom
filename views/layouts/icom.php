@@ -55,6 +55,9 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         array_push($navbar_items, ['label' => 'Sign In', 'url' => ["/user/login"]]);
     }
     else {
+        if(Yii::$app->user->identity->hasUsersPermission('admin_menu')) {
+            array_push($navbar_items, ['label' => 'Admin', 'url' => ["/admin/index"]]);
+        }
         array_push($navbar_items, ['label' => 'Create', 'url' => ["/feed/create"]]);
         array_push($navbar_items, ['label' => 'Settings', 'url' => ["/user/settings"]]);
         array_push($navbar_items, ['label' => 'Logout', 'url' => ["/user/logout"]]);
@@ -69,37 +72,26 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         ],
         'items' => $navbar_items
     ]);
-    
-    NavBar::begin([
-        'options' => [
-            'class' => 'nav navbar-nav navbar-white navbar-expand navbar-static-top'
-        ]
-    ]);
-    
-    echo Nav::widget([
-        'options' => [
-            'id' => 'w1-collapse',
-            'class' => 'nav navbar-nav navbar-white navbar-right'
-        ],
-        'items' =>
-            (Yii::$app->user->isGuest) ? [
-                ['label' => 'News ', 'url' => ["/feed/news"]],
-                ['label' => 'Images ', 'url' => ["/feed/images"]],
-                ['label' => 'Videos ', 'url' => ["/feed/videos"]],
-                ['label' => 'Products ', 'url' => ["/feed/products"]]
-            ] : [
-                ['label' => '+', 'url' => ["/feed/new"]],
-                ['label' => 'News ', 'url' => ["/feed/news"]],
-                ['label' => '+', 'url' => ["/feed/image"]],
-                ['label' => 'Images ', 'url' => ["/feed/images"]],
-                ['label' => '+', 'url' => ["/feed/video"]],
-                ['label' => 'Videos ', 'url' => ["/feed/videos"]],
-                ['label' => '+', 'url' => ["/feed/product"]],
-                ['label' => 'Products ', 'url' => ["/feed/products"]]
-        ]
-    ]);
-    
-    NavBar::end();
+
+    /*if(Yii::$app->user->identity->hasUsersPermission('admin_menu')) {
+        NavBar::begin([
+            'options' => [
+                'class' => 'nav navbar-nav navbar-white navbar-expand navbar-static-top'
+            ]
+        ]);
+        
+        echo Nav::widget([
+            'options' => [
+                'id' => 'w1-collapse',
+                'class' => 'nav navbar-nav navbar-white navbar-right'
+            ],
+            'items' => [
+                //['label' => 'Entities', 'url' => ["/feed/entities"]],
+            ]
+        ]);
+        
+        NavBar::end();
+    }*/
     
     ?>
 </header>

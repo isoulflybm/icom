@@ -17,6 +17,10 @@ use Yii;
  */
 class PostForm extends \yii\db\ActiveRecord
 {
+    //public $title;
+    //public $description;
+    public $text;
+    
     /**
      * {@inheritdoc}
      */
@@ -32,10 +36,12 @@ class PostForm extends \yii\db\ActiveRecord
     {
         return [
             [['created_at', 'updated_at', 'deleted_at'], 'safe'],
-            [['entity_id', 'title', 'description'], 'required'],
-            [['entity_id'], 'integer'],
-            [['description'], 'string'],
-            [['title'], 'string', 'max' => 255],
+            //[['entity_id', 'title', 'description'], 'required'],
+            //[['entity_id'], 'integer'],
+            //[['description'], 'string'],
+            //[['title'], 'string', 'max' => 255],
+            [['text'], 'required'],
+            [['text'], 'string'],
         ];
     }
 
@@ -49,9 +55,27 @@ class PostForm extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'deleted_at' => 'Deleted At',
-            'entity_id' => 'Entity ID',
-            'title' => 'Title',
-            'description' => 'Description',
+            //'entity_id' => 'Entity ID',
+            //'title' => 'Title',
+            //'description' => 'Description',
+            'text' => 'Text',
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function create()
+    {
+        $post = new Post();
+        //$post->entity_id = 0;
+        //$post->title = $this->title;
+        //$post->description = $this->description;
+        $post->user_id = Yii::$app->user->id;
+        $post->text = $this->text;
+        if($post->save(false)) {
+            return true;
+        }
+        return false;
     }
 }

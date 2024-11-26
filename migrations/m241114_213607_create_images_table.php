@@ -20,7 +20,7 @@ class m241114_213607_create_images_table extends Migration
             'image' => $this->binary(4294967295)->notNull(),
             'post_id' => $this->integer()->notNull(),
         ]);
-        $this->addForeignKey('image_id', 'images', 'post_id', 'posts', 'id', 'CASCADE');
+        $this->addForeignKey('posts_image_id', 'images', 'post_id', 'posts', 'id', 'CASCADE');
     }
 
     /**

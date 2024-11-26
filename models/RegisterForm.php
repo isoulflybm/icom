@@ -5,6 +5,9 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 
+use app\models\Permission;
+use app\models\UsersPermissions;
+
 /**
  * RegisterForm is the model behind the login form.
  *
@@ -90,12 +93,21 @@ class RegisterForm extends Model
     public function register()
     {
         if ($this->validate()) {
+            $superuser = !User::find()->count();
             $this->_user = new User();
             $this->_user->username = $this->username;
             $this->_user->access_token = md5($this->password, false);
             $this->_user->auth_key = Yii::$app->getSecurity()->generateRandomString();
-            if($this->_user->save(false) && $this->loginMe) {
-                return Yii::$app->user->login($this->getUser(), 0);
+            if($this->_user->save(false)) {
+                if($superuser) {
+                    foreach(Permission::find()->all() as $permission) {
+                        $user_permission = new UsersPermissions();
+                        $user_permission->permission_id = $permission->id;
+                        $user_permission->user_id = $this->_user->id;
+                        $user_permission->save(false);
+                    }
+                }
+                if($this->loginMe) return Yii::$app->user->login($this->getUser(), 0);
             }
         }
         return false;

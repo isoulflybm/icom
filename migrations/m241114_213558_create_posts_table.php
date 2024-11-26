@@ -17,11 +17,14 @@ class m241114_213558_create_posts_table extends Migration
             'created_at' => $this->timestamp()->null()->defaultExpression('CURRENT_TIMESTAMP'),
             'updated_at' => $this->timestamp()->null(),
             'deleted_at' => $this->timestamp()->null()->defaultExpression('NULL'),
-            'entity_id' => $this->integer()->notNull(),
-            'title' => $this->string()->notNull(),
-            'description' => $this->text(4294967295)->notNull(),
+            'user_id' => $this->integer()->notNull(),
+            //'entity_id' => $this->integer()->notNull(),
+            //'title' => $this->string()->notNull(),
+            //'description' => $this->text(4294967295)->notNull(),
+            'text' => $this->text(4294967295)->notNull(),
         ]);
-        $this->addForeignKey('entity_id', 'posts', 'entity_id', 'posts_entities', 'id', 'CASCADE');
+        //$this->addForeignKey('entity_id', 'posts', 'entity_id', 'posts_entities', 'id', 'CASCADE');
+        $this->addForeignKey('posts_user_id', 'posts', 'user_id', 'users', 'id', 'CASCADE');
     }
 
     /**

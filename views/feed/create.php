@@ -11,8 +11,9 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($model, 'title') ?>
-        <?= $form->field($model, 'description') ?>
+        <!--?= $form->field($model, 'title') ?-->
+        <!--?= $form->field($model, 'description')->textarea() ?-->
+        <?= $form->field($model, 'text')->textarea() ?>
     
         <div class="form-group">
             <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>

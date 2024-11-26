@@ -5,24 +5,24 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "posts".
+ * This is the model class for table "users_permissions".
  *
  * @property int $id
  * @property string|null $created_at
  * @property string|null $updated_at
  * @property string|null $deleted_at
- * @property int $entity_id
- * @property string $title
- * @property string $description
+ * @property int $user_id
+ *
+ * @property Users $user
  */
-class Post extends \yii\db\ActiveRecord
+class UsersPermissions extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'posts';
+        return 'users_permissions';
     }
 
     /**
@@ -32,12 +32,9 @@ class Post extends \yii\db\ActiveRecord
     {
         return [
             [['created_at', 'updated_at', 'deleted_at'], 'safe'],
-            //[['entity_id', 'title', 'description'], 'required'],
-            //[['entity_id'], 'integer'],
-            //[['description'], 'string'],
-            //[['title'], 'string', 'max' => 255],
-            [['text'], 'required'],
-            [['text'], 'string'],
+            [['user_id'], 'required'],
+            [['user_id'], 'integer'],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 
@@ -51,10 +48,17 @@ class Post extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'deleted_at' => 'Deleted At',
-            //'entity_id' => 'Entity ID',
-            //'title' => 'Title',
-            //'description' => 'Description',
-            'text' => 'Text',
+            'user_id' => 'User ID',
         ];
+    }
+
+    /**
+     * Gets query for [[User]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(Users::class, ['id' => 'user_id']);
     }
 }

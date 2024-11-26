@@ -131,4 +131,22 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return $this->hasMany(UsersLogos::class, ['user_id' => 'id']);
     }
+
+    /**
+     * Gets query for [[UsersPermissions]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsersPermissions()
+    {
+        return $this->hasMany(UsersPermissions::class, ['user_id' => 'id']);
+    }
+
+    public function hasUsersPermission($permission) {
+        if($permission = Permission::findOne(['key' => $permission])) {
+            return $this->hasOne(UsersPermissions::class, ['user_id' => 'id'])
+                ->where(['users_permissions.permission_id' => $permission->id]);
+        }
+        return null;
+    }
 }

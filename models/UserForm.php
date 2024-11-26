@@ -198,4 +198,14 @@ class UserForm extends \yii\db\ActiveRecord
 
         return $this->_user;
     }
+
+    /**
+     * Gets query for [[UsersPermisiions]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsersPermission()
+    {
+        return $this->hasMany(UsersPermissions::class, ['user_id' => 'id']);
+    }
 }

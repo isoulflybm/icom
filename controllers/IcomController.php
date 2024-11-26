@@ -6,6 +6,7 @@ use Yii;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
+use app\models\Post;
 
 class IcomController extends Controller
 {
@@ -32,7 +33,10 @@ class IcomController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $model = Post::find()->all();
+        return $this->render('index', [
+            'model' => $model,
+        ]);
     }
 
     /**

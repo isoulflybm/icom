@@ -21,7 +21,8 @@
         "yiithings/yii2-dotenv": "*",
         "workerman/workerman": "^4.1",
         "kartik-v/yii2-widget-sidenav": "^1.0",
-        "bower-asset/bootstrap": "*"
+        "bower-asset/bootstrap": "*",
+        "bizley/quill": "^2.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

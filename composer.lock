@@ -4,8 +4,59 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1d6802a586d62fffc09c52457ea82e80",
+    "content-hash": "661a54f0f8c2fc6f71802f941faf853a",
     "packages": [
+        {
+            "name": "bizley/quill",
+            "version": "2.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bizley/yii2-quill.git",
+                "reference": "eccbab20f11ebca17c35fe19ddfdc885541e8bd2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bizley/yii2-quill/zipball/eccbab20f11ebca17c35fe19ddfdc885541e8bd2",
+                "reference": "eccbab20f11ebca17c35fe19ddfdc885541e8bd2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0",
+                "yiisoft/yii2": ">=2.0.0 <2.1.0"
+            },
+            "require-dev": {
+                "roave/security-advisories": "dev-master"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "bizley\\quill\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Pawel Bizley Brzozowski",
+                    "email": "pawel@positive.codes"
+                }
+            ],
+            "description": "Quill editor implementation for Yii 2.",
+            "keywords": [
+                "editor",
+                "quill",
+                "widget",
+                "wysiwyg",
+                "yii2"
+            ],
+            "support": {
+                "issues": "https://github.com/bizley/yii2-quill/issues",
+                "source": "https://github.com/bizley/yii2-quill"
+            },
+            "time": "2019-07-21T14:58:32+00:00"
+        },
         {
             "name": "bower-asset/bootstrap",
             "version": "v5.3.3",

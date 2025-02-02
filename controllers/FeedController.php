@@ -6,6 +6,7 @@ use Yii;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
+use app\models\Post;
 use app\models\PostForm;
 
 class FeedController extends Controller
@@ -27,6 +28,42 @@ class FeedController extends Controller
         }
         
         return $this->render('create', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionEdit()
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new PostForm();
+        if (
+            $model->load(Yii::$app->request->post()) && $model->edit()
+        ) {
+            return $this->goBack();
+        }
+
+        $model->text = Post::find(Yii::$app->request->get('id'))->one()->text;
+        return $this->render('edit', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionDelete()
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new PostForm();
+        if ($model->load(Yii::$app->request->post()) && $model->delete()) {
+            return $this->goBack();
+        }
+
+        $model->text = Post::find(Yii::$app->request->get('id'))->one()->text;
+        return $this->render('delete', [
             'model' => $model,
         ]);
     }

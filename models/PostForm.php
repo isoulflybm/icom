@@ -78,4 +78,38 @@ class PostForm extends \yii\db\ActiveRecord
         }
         return false;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function edit()
+    {
+        $post = Post::find(Yii::$app->request->get('id'))->one();
+        //$post->entity_id = 0;
+        //$post->title = $this->title;
+        //$post->description = $this->description;
+        //$post->user_id = Yii::$app->user->id;
+        $post->text = $this->text;
+        if($post->save(false)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function delete()
+    {
+        $post = Post::find(Yii::$app->request->get('id'))->one();
+        //$post->entity_id = 0;
+        //$post->title = $this->title;
+        //$post->description = $this->description;
+        //$post->user_id = Yii::$app->user->id;
+        //$post->text = $this->text;
+        if($post->delete(false)) {
+            return true;
+        }
+        return false;
+    }
 }

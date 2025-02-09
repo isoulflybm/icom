@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
         <p>Подтвердите удаление</p>
         <?= $form->field($model, 'text')->textarea(
             ['style' => 'display: none', 'value' => $model->text]
-        )->label() ?>
+        )->label(false) ?>
         <div class="form-group">
             <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
         </div>
